@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <div>
+        <p th:text="'My Cards: ' + ${name} " />
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>Card ID</td>
+                <td>Card Number</td>
+                <td>Card Code</td>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr th:if="${cards.empty}">-->
+                <!--<td colspan="4">No tasks</td>-->
+            <!--</tr>-->
+            <tr th:each="card : ${cards}">
+                <td th:text="${card.card_id}"></td>
+                <td th:text="${card.card_number}"></td>
+                <!--<td><a href="view.html" th:href="@{'/' + ${task.id}}" th:text="${task.title}">Title ...</a></td>-->
+                <td th:text="${card.card_code}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br/>
+
+    <p>Add New Card <a href="/addNewCardForm">here</a></p>
+
+</body>
+</html>

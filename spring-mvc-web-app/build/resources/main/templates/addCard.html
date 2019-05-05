@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p th:text="'Add a new card: '" />
+
+<form action="#" th:action="@{/addCard}" th:object="${cardsinfo}" method="post">
+    <table>
+        <tr>
+            <td>Card Number:</td>
+            <td><input type="text" th:field="*{card_number}" /></td>
+            <td th:if="${#fields.hasErrors('card_number')}" th:errors="*{card_number}">Card Number Error</td>
+        </tr>
+        <tr>
+            <td>Card Code:</td>
+            <td><input type="text" th:field="*{card_code}" /></td>
+            <td th:if="${#fields.hasErrors('card_code')}" th:errors="*{card_code}">Card Code Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
