@@ -15,8 +15,7 @@
 		header("Location: login.php?login=failed");
 		exit();
 		}
-	} 
-	mysqli_close($conn);
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,9 +25,10 @@
 <body>
 	<h1>Sign in</h1>
 	<form method = "post" action = "login.php">
-	Username: <input type="username" placeholder="Enter username" name="username" required><br>
-	Password: <input type="password" placeholder="Enter password" name="password" required><br>
+	Username: <input type="username" placeholder="Enter username" name="username" maxlength="15" required><br>
+	Password: <input type="password" placeholder="Enter password" name="password" minlength="6" maxlength="16" required><br>
 	<input type="submit" name="login"></button><br>
+	<p>New? <a href="register.php">Create account</a></p>
 	</form>
 </body>
 </html>
