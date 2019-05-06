@@ -1,18 +1,18 @@
 <?php 
 require_once('dbConnection.php');
-session_start();
-if(!isset($_SESSION['loggedin'])) header("Location: login.php");
+include_once('userSession.php');
+checkSession();
 
 try {
-$cardTable = "CREATE TABLE myCard (card_id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY, card_number int(9) NOT NULL, card_code int(3) NOT NULL, user_name VARCHAR(100) NOT NULL)";
+$cardTable = "CREATE TABLE IF NOT EXISTS myCard (card_id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY, card_number int(9) NOT NULL, card_code int(3) NOT NULL, user_name VARCHAR(100) NOT NULL)";
 mysqli_query($conn, $cardTable);
 } catch(Exception $e) {
 	$e->getMessage();
 }
 
+$user_name = $_SESSION['name'];
 $card_number = mysqli_real_escape_string($conn, $_POST['card_number']);
 $card_code = mysqli_real_escape_string($conn, $_POST['card_code']);
-$user_name = $_SESSION['name'];
 
 if(isset($user_name)) echo "Hello, ".$user_name;
 

@@ -1,5 +1,14 @@
 <?php 
 	require_once('dbConnection.php');
+	include_once('userSession.php');
+	checkRegSession();
+
+	try {
+	$registerTable = "CREATE TABLE IF NOT EXISTS register (id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY, user_name varchar(50) NOT NULL, user_email varchar(50) NOT NULL, user_username VARCHAR(50) NOT NULL, user_password VARCHAR(50) NOT NULL)";
+	mysqli_query($conn, $registerTable);
+	} catch(Exception $e) {
+	$e->getMessage();
+	}
 
 	//SQL injection prevention & some validation queries
 	$name = mysqli_real_escape_string($conn, $_POST['name']);
