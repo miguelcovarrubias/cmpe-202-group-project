@@ -1,5 +1,6 @@
 <?php
-	$conn = mysqli_connect("localhost", "user1", "password1", "cmpe202");
+	$conn = mysqli_connect("localhost", "username", "password", "cmpe202");
+	echo "I m here yo. <br>";
 	// Check connection
 	if ($conn->connect_error) {
 	    	die("Connection failed: " . $conn->connect_error);
@@ -14,3 +15,4 @@
 	} catch(Exception $e){
 		$e->getMessage();
 	}
+	$conn->close();
