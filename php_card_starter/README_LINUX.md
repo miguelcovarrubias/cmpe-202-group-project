@@ -8,7 +8,8 @@
 	* Go to the following directory: /var/www/html/
 	* There should be a file called 'index.html' here, rename that file to, or replace that file with the another with the name, 'index.php'.
 	* If you replaced the old name with new, replace the previous code, remove everything, with the following code:
-		```<?php	
+		```
+		<?php	
 			include('cmpe-202-group-project/home.php'); 
 	* The content of the include statement above might be specific to your setup, meaning:
 		* I cloned the git repository, which is named 'cmpe-202-group-project', inside the /var/www/html/ directory, which is why inorder to run the home.php file I had to go inside the 'cmpe-202-group-project' folder.

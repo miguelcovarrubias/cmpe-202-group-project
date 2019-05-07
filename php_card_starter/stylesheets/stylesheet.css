@@ -33,6 +33,29 @@
   display: block;
 }
 
+/*for aligning left*/
+.float-left-child{
+	float: left;
+}
+
+/*also for aligin side by side*/
+.inline-block-child{
+	display: inline-block;
+	margin: 10px;
+}
+
+/*Overriting some things in button class*/
+.button{
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	margin:0 auto;
+	background-color: #4CAF50; 
+	font-weight: bold;
+	font-size: 19px;
+	text-decoration: underline;
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
 
