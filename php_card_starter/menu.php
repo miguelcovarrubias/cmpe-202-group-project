@@ -12,7 +12,7 @@
 <form method="post" action="insertOrder.php">
 	<fieldset>
 		<label>Select a Beverage</label>
-		<select name="selectedBev" required>
+			<select name="selectedBev" required>
 
 <?php
 	//Get and display the data from the beverage_name table	
@@ -30,7 +30,7 @@
 	
 	<fieldset>
 		<label>Select a Size</label>
-		<select name="selectedSize" required>
+			<select name="selectedSize" required>
 
 <?php	
 	//Get and display the data from the beverage_size_price table	
@@ -48,7 +48,7 @@
 	
 	<fieldset>
 		<label>Select Temperature</label>
-		<select name="selectedTemp" required>
+			<select name="selectedTemp" required>
 
 <?php	
 	//Get and display the data from the beverage_options table	
