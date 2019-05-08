@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once('dbConnection.php');
 include_once('userSession.php');
 checkSession();
@@ -13,22 +13,51 @@ mysqli_query($conn, "INSERT INTO beverages_size_price (beverage_size, beverage_p
 	$e->getMessage();
 }
 
-$beverage_img = 'beverage_img';
-$beverage_size = 'beverage_size';
-$beverage_price = 'beverage_price';
+	if(isset($_POST['addToCart'])) {
+		$id = $_GET['add'];
+		$result = mysqli_query($conn, "SELECT * FROM beverages_menu WHERE id = '$id'");
+		$row = mysqli_fetch_assoc($result);
 
-$product = mysqli_query($conn, "SELECT * FROM beverages_menu, beverages_size_price ORDER BY id");
+		$cart = array(
+			$id=>array('name'=>$row['beverage_name'], 'id'=>$row['id'], 'img'=>$row['beverage_img'])
+		);
 
-		if(mysqli_num_rows($product)>0) {
-			while($row = mysqli_fetch_assoc($product)) {
-			?>
+		if(empty($_SESSION['shop'])) {
+			$_SESSION['shop'] = $cart;
+		} else {
+			if(!in_array($id,array_keys($_SESSION['shop']))) {
+			$_SESSION['shop'] = array_merge($_SESSION['shop'],$cart);
+		  }
+	    }
+	}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Order</title>
+</head>
+<body>
+<?php
+		//fetch & display menu items
+		$menu = mysqli_query($conn, "SELECT * FROM beverages_menu ORDER BY id ASC");
+		if(mysqli_num_rows($menu)>0) {
+			while($row = mysqli_fetch_assoc($menu)) {
+			?>	
 			<div>
-				<?php echo "<img src=$row[$beverage_img]>"?>
-				<?php echo "$row[$beverage_size]" ?>
-                <?php echo "$row[$beverage_price]" ?>
-                <?php echo '<a href="#?add='.$row['id'].'">Add</a>'; ?>
+				<form method="post" action="purchase.php?add=<?php echo $row["id"]; ?>">
+					<div>
+						<h2><?php echo $row['beverage_name'] ?></h2>
+						<img src=<?php echo $row["beverage_img"]?>>
+                		<input type="submit" name="addToCart" value="AddToCart">
+					</div>
+				</form>
 			</div>
     		<?php
 			}
+			?>
+			<p><a href="cart.php"><button>Cart</button></a></p>
+			<?php
 		}
 ?>
+</body>
+</html>
