@@ -17,10 +17,9 @@ CREATE TABLE IF NOT EXISTS users_info (
 
 CREATE TABLE IF NOT EXISTS orders_status (
   order_id int(8) NOT NULL AUTO_INCREMENT,
-  beverage_name varchar(40) NOT NULL,
-  price double,
-  size varchar(40),
-  other_options varchar(40),
+  user_id int(8) NOT NULL,
+  is_done varchar(6) DEFAULT 'false',
+  total_price_amount double,
   PRIMARY KEY (order_id)
 );
 
@@ -33,15 +32,18 @@ CREATE TABLE IF NOT EXISTS orders_description (
 );
 
 CREATE TABLE IF NOT EXISTS beverage_menu (
-  beverage_name varchar(40) NOT NULL
+  beverage_name varchar(40) NOT NULL,
+  PRIMARY KEY (`beverage_name`)
 );
 
 CREATE TABLE IF NOT EXISTS beverage_size_price (
-  beverage_name varchar(40) NOT NULL,
-  price double NOT NULL
+  beverage_size varchar(40) NOT NULL,
+  price double NOT NULL,
+  PRIMARY KEY (`beverage_size`)
 );
 
 CREATE TABLE IF NOT EXISTS beverage_options (
-  name varchar(40) NOT NULL
+  name varchar(40) NOT NULL,
+  PRIMARY KEY (`name`)
 );
 
