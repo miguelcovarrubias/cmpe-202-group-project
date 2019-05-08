@@ -5,6 +5,7 @@ checkSession();
 
 try {
 $cardTable = "CREATE TABLE IF NOT EXISTS myCard (card_id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY, card_number int(9) NOT NULL, card_code int(3) NOT NULL, user_name VARCHAR(100) NOT NULL)";
+
 mysqli_query($conn, $cardTable);
 } catch(Exception $e) {
 	$e->getMessage();
@@ -37,7 +38,7 @@ if(isset($user_name)) echo "Hello, ".$user_name;
 	<input type="submit" name="add" value="Add">
 	</form>
 
-	<a href="viewCard.php"><button>View Card</button></a>
+	<a href="viewCard.php"><button>View My Cards</button></a>
 	<p></p>
 	<a href="logout.php"><button>Logout</button></a>
  </body>

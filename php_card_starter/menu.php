@@ -1,9 +1,6 @@
-
 <?php
-/*The code the css and the html here was taken from: https://www.w3schools.com/howto/howto_css_dropdown.asp*/
 	include_once("stylesheets/stylesheet.css");
-	//the line below can be replaced with [require_once('dbConnection.php');], i m pretty sure	
-	include("tempLocalDBSetup.php");
+    require_once('dbConnection.php');
 
 	echo "<h1> Make your order below </h1>";
 ?>
@@ -13,7 +10,6 @@
 	<fieldset>
 		<label>Select a Beverage</label>
 			<select name="selectedBev" required>
-
 <?php
 	//Get and display the data from the beverage_name table	
 	$sqlquery = "select beverage_name from beverage_menu;";
@@ -31,15 +27,14 @@
 	<fieldset>
 		<label>Select a Size</label>
 			<select name="selectedSize" required>
-
-<?php	
+<?php
 	//Get and display the data from the beverage_size_price table	
-	$sqlquery = "select * from beverage_size_price;";
+	$sqlquery = "select CONCAT(\"$\", price, \", \", beverage_size) as beverage_size_and_price, beverage_size, price from beverage_size_price order by price asc;";
 	$result = $conn->query($sqlquery);
 	
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
-			echo "<option value='".$row["beverage_size"]."'>".$row["beverage_size"]."</option>";
+			echo "<option value='".$row["beverage_size_and_price"]."'>".$row["beverage_size_and_price"]."</option>";
 		}
 		echo "</select>";
 		echo "</fieldset>";

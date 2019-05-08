@@ -1,6 +1,6 @@
-<?php 	
-	require_once('dbConnection.php');
+<?php
 	session_start();
+	require_once('dbConnection.php');
 
 	if (isset($_POST['login'])) {
 	$username = mysqli_real_escape_string($conn, $_POST['username']);
