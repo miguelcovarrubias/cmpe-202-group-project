@@ -37,9 +37,9 @@ if(isset($user_name)) echo "Hello, ".$user_name;
  	Card Code: <input type="text" name="card_code" pattern="[0-9]{3}" placeholder="3 digits" maxlength="3" required>
 	<input type="submit" name="add" value="Add">
 	</form>
-
-	<a href="viewCard.php"><button>View My Cards</button></a>
-	<p></p>
-	<a href="logout.php"><button>Logout</button></a>
+	<p><a href="purchase.php"><button>Purchase</button></a></p>
+	<p><a href="viewCard.php"><button>View Cards</button></a></p>
+	<p><a href="menu.php"><button>Order Beverage</button></a></p>
+	<p><a href="logout.php"><button>Logout</button></a></p>
  </body>
  </html>
