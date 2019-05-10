@@ -1,6 +1,20 @@
 <?php
 	require_once('dbConnection.php');
 	include_once('userSession.php');
+	
+	try{
+		$createOrderStatus = "CREATE TABLE IF NOT EXISTS orders_status (order_id int(8) NOT NULL AUTO_INCREMENT, user_id int(8) NOT NULL, is_done varchar(6) DEFAULT 'false', total_price_amount double, PRIMARY KEY (order_id));";
+		mysqli_query($conn, $createOrderStatus);
+	} catch(Exception $e){
+		$e->getMessage();
+	}
+
+	try{
+		$createOrdersDescriptions = "CREATE TABLE IF NOT EXISTS orders_description (order_id int(8) NOT NULL, beverage_name varchar(40) NOT NULL, price double, cup_size varchar(40), other_options varchar(40));";
+		mysqli_query($conn, $createOrdersDescriptions);
+	} catch(Exception $e){
+		$e->getMessage();
+	}
 
 	//if user isn't logged in don't show anything
     // TODO
