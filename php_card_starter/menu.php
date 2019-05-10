@@ -1,7 +1,7 @@
 <?php
 	include_once("stylesheets/stylesheet.css");
-    require_once('dbConnection.php');
-
+	require_once('dbConnection.php');
+	
 	echo "<h1> Make your order below </h1>";
 ?>
 
