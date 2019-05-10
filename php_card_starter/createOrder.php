@@ -5,6 +5,11 @@
 	echo "<h1> Make your order below </h1>";
 ?>
 
+<?php
+$cart = array();
+
+?>
+
 <br>
 <form method="post" action="insertOrder.php">
 	<fieldset>
@@ -60,8 +65,12 @@
 	
 	$conn->close();
 ?>
-	
-	<br>
-	<button class="button" type="submit" name="insertOrder"> $ Buy </button>
+
+<br>
+<!-- push to cart               -->
+<button> Add to Order</button>
+</br>
+<br>  </br>
+<button class="button" > Finish and Pay </button>
 </form>	
 		

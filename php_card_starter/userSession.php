@@ -8,6 +8,6 @@ function checkSession() {
 
 //prevent user from registering while logged in
 function checkRegSession() {
-	if(isset($_SESSION['loggedin'])) header("Location: addCard.php");
+	if(isset($_SESSION['loggedin'])) header("Location: userDashboard.php");
 }
 ?>

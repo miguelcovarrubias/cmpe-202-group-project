@@ -10,7 +10,7 @@
 		if(mysqli_fetch_assoc($authQuery)) {
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['name'] = $username;
-			header("Location: addCard.php?login=success");
+			header("Location: userDashboard.php?login=success");
 		} else {
 		header("Location: login.php?login=failed");
 		exit();
