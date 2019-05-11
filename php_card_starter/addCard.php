@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('dbConnection.php');
 include_once('userSession.php');
 checkSession();
@@ -19,10 +19,12 @@ if(isset($user_name)) echo "Hello, ".$user_name;
 
 	if(isset($_POST['add'])) {
 		$authCard = mysqli_query($conn, "SELECT * FROM myCard WHERE card_number='$card_number' AND card_code=$card_code");
-			if(!mysqli_fetch_assoc($authCard)) { 
+			if(!mysqli_fetch_assoc($authCard)) {
 				$insertCard = "INSERT INTO myCard (card_number, card_code, user_name) VALUES ('$card_number', '$card_code', '$user_name')";
 				mysqli_query($conn, $insertCard);
 			}
+	} else {
+		echo "Warning: invalid card!";
 	}
 ?>
  <!DOCTYPE html>
@@ -38,6 +40,7 @@ if(isset($user_name)) echo "Hello, ".$user_name;
 	<input type="submit" name="add" value="Add">
 	</form>
 	<p><a href="userDashboard.php"><button>Order Beverage</button></a></p>
+	<p><a href="viewCard.php"><button>View Card</button></a></p>
 	<p><a href="logout.php"><button>Logout</button></a></p>
  </body>
  </html>
