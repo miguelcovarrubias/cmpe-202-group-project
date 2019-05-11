@@ -4,21 +4,21 @@
     checkSession();
 
 	$orderID;
-	$userID;
+	$userID = $_SESSION['name'];
 	
 	$orderID = $_SESSION['orderID'];
 	
-	if(isset($_SESSION['name'])){
-		$user_name = $_SESSION['name'];
-		$nameQuery = "select * from users_info where username='$user_name'";
-		$result = $conn->query($nameQuery);
+	//~ if(isset($_SESSION['name'])){
+		//~ $user_name = $_SESSION['name'];
+		//~ $nameQuery = "select * from users_info where username='$user_name'";
+		//~ $result = $conn->query($nameQuery);
 	
-		if($result->num_rows > 0){
-			if($row = $result->fetch_assoc()){
-				$userID = $row['user_id'];
-			}
-		}
-	}
+		//~ if($result->num_rows > 0){
+			//~ if($row = $result->fetch_assoc()){
+				//~ $userID = $row['user_id'];
+			//~ }
+		//~ }
+	//~ }
 	
 
 	//charge the user's active card 
@@ -27,12 +27,12 @@
 	
 
 	function getOrderPrice($userID, $orderID, $conn){
-		//echo "<br><h1>Here i m</h1><br>";
+		echo "<br><h1>Here i m: $orderID</h1><br>";
 		$orderQuery = "SELECT * from orders_description where order_id=$orderID;";
 		//$result = $conn->query($orderQuery);
 		$price = 0;
 		if($result = $conn->query($orderQuery)){
-			//echo("Got something <br>");
+			echo("Got something: $userID <br>");
 			while($row = $result->fetch_assoc()){
 				$orderID = $row["order_id"];
 				$price = $row["price"] + $price;	
