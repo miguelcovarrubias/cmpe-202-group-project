@@ -2,16 +2,7 @@
 require_once('dbConnection.php');
 include_once('userSession.php');
 checkSession();
-$user_name = $_SESSION['name'];
-$nameQuery = "select * from users_info where username='$user_name'";
-$result = $conn->query($nameQuery);
-
-$userID;
-if($result->num_rows > 0){
-	if($row = $result->fetch_assoc()){
-		$userID = $row['id'];
-	}
-}
+$user_id = $_SESSION['name'];
 if(isset($user_name)) echo "<u>".$user_name.", Active Cards:</u><br>";
 ?>
 <!DOCTYPE html>
@@ -24,7 +15,7 @@ if(isset($user_name)) echo "<u>".$user_name.", Active Cards:</u><br>";
 		<select name="card" onChange="this.form.submit()">
 			<option>ViewCard</option>
 			<?php //fetch current user card numbers
-			$cardNumber = mysqli_query($conn, "SELECT card_number FROM cards_info WHERE user_id='$userID'");
+			$cardNumber = mysqli_query($conn, "SELECT card_number FROM cards_info WHERE user_id='$user_id'");
 	 		while($row = mysqli_fetch_array($cardNumber)):; ?>
 			<option><?php echo $row['card_number']; ?></option>
 			<?php endwhile;
