@@ -3,7 +3,7 @@ require_once('dbConnection.php');
 include_once('userSession.php');
 checkSession();
 $user_name = $_SESSION['name'];
-$nameQuery = "select * from register where user_username='$user_name'";
+$nameQuery = "select * from users_info where username='$user_name'";
 $result = $conn->query($nameQuery);
 
 $userID;

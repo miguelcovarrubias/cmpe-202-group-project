@@ -7,14 +7,16 @@ if (isset($_GET['username']) && $_GET['username']!="" or $user_name != '') {
     if ($user_name == '') {
         $user_name = $_GET['username'];
     }
-    $result3 = mysqli_query($conn, "SELECT id, first_name, last_name, username, email, card_id as main_card_id FROM user_info where username = '$user_name'");
+    $result3 = mysqli_query($conn, "SELECT user_id, first_name, last_name, username, email, card_id as main_card_id FROM users_info where username = '$user_name'");
 
     if (mysqli_num_rows($result3) > 0) {
         while ($row3 = mysqli_fetch_array($result3)) {
-            $id = $row3['id'];
-            $userName = $row3['user_name'];
-            $userUserName = $row3['user_username'];
-            $email = $row3['user_email'];
+            $id = $row3['user_id'];
+            $userName = $row3['first_name'];
+            $userLastName = $row3['last_name'];
+            $userUserName = $row3['username'];
+            $email = $row3['email'];
+            $mainCardId = $row3['main_card_id'];
         }
     } else {
         response(200, "No Record Found");
@@ -47,8 +49,12 @@ if (isset($_GET['username']) && $_GET['username']!="" or $user_name != '') {
         <td valign="top"><?php echo $id ?></td>
     </tr>
     <tr>
-        <td valign="top"><div align="left">Name:</div></td>
+        <td valign="top"><div align="left">First Name:</div></td>
         <td valign="top"><?php echo $userName ?></td>
+    </tr>
+    <tr>
+        <td valign="top"><div align="left">Last Name:</div></td>
+        <td valign="top"><?php echo $userLastName ?></td>
     </tr>
     <tr>
         <td valign="top"><div align="left">Email:</div></td>
@@ -57,6 +63,10 @@ if (isset($_GET['username']) && $_GET['username']!="" or $user_name != '') {
     <tr>
         <td valign="top"><div align="left">Username:</div></td>
         <td valign="top"><?php echo $userUserName ?></td>
+    </tr>
+     <tr>
+        <td valign="top"><div align="left">Main Card Id:</div></td>
+        <td valign="top"><?php echo $mainCardId ?></td>
     </tr>
 </table>
 <p><a href="userDashboard.php"><button>User Dashboard</button></a></p>

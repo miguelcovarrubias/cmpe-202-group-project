@@ -21,7 +21,7 @@ $user_name = $_SESSION['name'];
 $card_number = mysqli_real_escape_string($conn, $_POST['card_number']);
 $card_code = mysqli_real_escape_string($conn, $_POST['card_code']);
 
-$nameQuery = "select * from register where user_username='$user_name'";
+$nameQuery = "select * from users_info where username='$user_name'";
 $result = $conn->query($nameQuery);
 
 $userID;
@@ -55,7 +55,7 @@ if(isset($user_name)) echo "Hello, ".$user_name."<br>";
  	Card Code: <input type="text" name="card_code" pattern="[0-9]{3}" placeholder="3 digits" maxlength="3" required>
 	<input type="submit" name="add" value="Add">
 	</form>
-	<p><a href="userDashboard.php"><button>Order Beverage</button></a></p>
+	<p><a href="userDashboard.php"><button>User Dashboard</button></a></p>
 	<p><a href="viewCard.php"><button>View Card</button></a></p>
 	<p><a href="logout.php"><button>Logout</button></a></p>
  </body>

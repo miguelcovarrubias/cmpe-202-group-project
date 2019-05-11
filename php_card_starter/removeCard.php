@@ -4,7 +4,7 @@ include_once('userSession.php');
 checkSession();
 $user_name = $_SESSION['name'];
 if(isset($user_name)) echo "<u>".$user_name.", Active Cards:</u><br>";
-$nameQuery = "select * from register where user_username='$user_name'";
+$nameQuery = "select * from users_info where username='$user_name'";
 $result = $conn->query($nameQuery);
 
 $userID;

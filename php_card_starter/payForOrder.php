@@ -9,7 +9,7 @@
 	
 	if(isset($_SESSION['name'])){
 		$user_name = $_SESSION['name'];
-		$nameQuery = "select * from register where user_username='$user_name'";
+		$nameQuery = "select * from users_info where username='$user_name'";
 		$result = $conn->query($nameQuery);
 	
 		if($result->num_rows > 0){
