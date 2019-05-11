@@ -92,9 +92,10 @@ $cart = array();
 
 <br>
 <!-- push to cart               -->
-<button> Add to Order</button>
+
+<button class="button" type="submit" name="insertOrder"> Add to Order </button>
 </br>
 <br>  </br>
-<button class="button" > Finish and Pay </button>
+<button class="button" type="submit" name="insertOrder"> Finish and Pay </button>
 </form>	
 		
