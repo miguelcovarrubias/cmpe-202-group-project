@@ -5,6 +5,8 @@
 	$orderID;
 	$userID;
 	
+	$orderID = $_SESSION['orderID'];
+	
 	if(isset($_SESSION['name'])){
 		$user_name = $_SESSION['name'];
 		$nameQuery = "select * from register where user_username='$user_name'";
@@ -17,7 +19,7 @@
 		}
 	}
 	
-	echo "<br><h1>$userID</h1><br>";
+	//echo "<br><h1>$orderID</h1><br>";
 
 	//charge the user's active card 
 	getOrderPrice($userID, $orderID, $conn);
@@ -25,8 +27,8 @@
 	
 
 	function getOrderPrice($userID, $orderID, $conn){
-		echo "<br><h1>Here i m</h1><br>";
-		$orderQuery = "SELECT * from orders_description where order_id=$userID;";
+		//echo "<br><h1>Here i m</h1><br>";
+		$orderQuery = "SELECT * from orders_description where order_id=$orderID;";
 		//$result = $conn->query($orderQuery);
 		$price = 0;
 		if($result = $conn->query($orderQuery)){
@@ -35,30 +37,36 @@
 				$orderID = row["order_id"];
 				$price = $row["price"] + $price;	
 			}
-			echo "<br>This is the price of the order.$price<br>";
+			echo "<br><h1>Total price to pay: $$price </h1><br>";
 			$insertToOrderStatus = "insert into orders_status(user_id, total_price_amount) values($userID, $price)";
 			$conn->query($insertToOrderStatus);
 			
 		}
 		//echo($price);
 		if($price > 0){
-			echo "<br><h1>Going to charge card<h1><br>";
-			chargeUserActiveCard($userID, $orderID, $price);
+			chargeUserActiveCard($userID, $orderID, $price, $conn);
 		}
 	}
 
 
-	function chargeUserActiveCard($userID, $orderID, $price){
-		$cardQuery = "SELECT * from cards_info where user_name='ms1' and active='true'";
+	function chargeUserActiveCard($userID, $orderID, $price, $conn){
+		$cardQuery = "SELECT * from cards_info where user_id='$userID' and active='true';";
+		//echo "<br><h3>Going to charge card for user with ID: '$userID'<h3><br>";
 		if($result = $conn->query($cardQuery)){
+			//echo "<br><h1>Got something</h1><br>";
 			if($row = $result->fetch_assoc()){
 				$prevCardAmou = $row["money"];
 				if($prevCardAmou > $price){
 					$lastFour = substr($row["card_number"], -4);
-					echo "Your card number ending with ".$lastFour." has been charged.";
-					$newCardAmou = $newCardAmou - $price;
+					$newCardAmou = $prevCardAmou - $price;
 					$card_id = $row["card_id"];
-					$conn->query("update myCard set money='$newCardAmou' where card_id='$card_id'");
+					$conn->query("update cards_info set money='$newCardAmou' where card_id='$card_id'");
+					echo "Your card number ending with ".$lastFour." has been charged.<br>
+					New cards amount is: $newCardAmou<br>";
+				}
+				else{
+					$lastFour = substr($row["card_number"], -4);
+					echo "<br><h3>Not enough balance for card ending with: ".$lastFour." </h3><br>";
 				}
 			}
 		} 

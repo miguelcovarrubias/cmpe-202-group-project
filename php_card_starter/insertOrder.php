@@ -94,7 +94,7 @@ table, th, td {
 		extract($_POST);
         $nextOrderIdQuery = "SELECT AUTO_INCREMENT as next_id FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'db_name' AND TABLE_NAME = 'orders_status'";
         $nextOrderIdQueryResult = $conn->query($nextOrderIdQuery);
-
+        
         $nextOrderId = "";
 
         if ($result = $conn->query($nextOrderIdQuery)) {
@@ -111,31 +111,35 @@ table, th, td {
         $cup_price_size = str_replace(".", "", $cup_price_size);
         $insertOrderDescription = "INSERT INTO orders_description (order_id,beverage_name, price, cup_size, other_options) VALUES ('$nextOrderId','$selectedBev', '$cup_price_size[0]', '$cup_price_size[1]' ,'$selectedTemp')";
         mysqli_query($conn, $insertOrderDescription);
+        $_SESSION['orderID'] = $nextOrderId;
 	}
 	
-	$result = mysqli_query($conn, "SELECT beverage_name, price, cup_size, other_options FROM 		orders_description");
+	$result = mysqli_query($conn, "SELECT * FROM orders_description");
 
 	    if (mysqli_num_rows($result) > 0) {
 		    echo "<br><br><br><h2>Your current order:</h2><br>";
 		    echo "<table>";
 		    echo "<tr><th>Beverage</th><th>Size</th><th>Other Options</th></tr>";
         	while ($row = mysqli_fetch_array($result)) {
-		    echo"<tr>";
-		    echo"<td>";
-        	    echo $row['beverage_name'];
-		    echo "</td>";
-		    echo"<td>";
-        	    echo $row['cup_size'];
-		    echo "</td>";
- 		    echo"<td>";
-        	    echo $row['other_options'];
-		    echo "</td>";
-		    echo "</tr>";
+				//echo "<br>".$row['order_id']." here it is --------: ".$nextOrderId."<br>";
+				if($row['order_id'] == $nextOrderId){
+					echo"<tr>";
+					echo"<td>";
+						echo $row['beverage_name'];
+					echo "</td>";
+					echo"<td>";
+						echo $row['cup_size'];
+					echo "</td>";
+					echo"<td>";
+						echo $row['other_options'];
+					echo "</td>";
+					echo "</tr>";
+				}
         	}
 		    echo"</table>";
-    	    } else {
-        	echo "<br>No Record Found in cart";
-    	    }
+		} else {
+			echo "<br>No Record Found in cart";
+		}
 	
     }
 
@@ -155,5 +159,5 @@ table, th, td {
 ?>	
 
 <p><a href="createOrder.php"><button>Add more</button></a></p>
-<button class="button" type="submit" name="insertOrder"> Finish and Pay </button>
+<a href="payForOrder.php"><button class="button" type="submit" name="insertOrder"> Finish and Pay </button></a>
 
