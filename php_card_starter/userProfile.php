@@ -1,13 +1,13 @@
 <?php
 require_once('dbConnection.php');
 include_once('userSession.php');
-$user_name = $_SESSION['name'];
+$userId = $_SESSION['name'];
 
-if (isset($_GET['username']) && $_GET['username']!="" or $user_name != '') {
-    if ($user_name == '') {
-        $user_name = $_GET['username'];
+if (isset($_GET['username']) && $_GET['username']!="" or $userId != '') {
+    if ($userId == '') {
+        $userId = $_GET['username'];
     }
-    $result3 = mysqli_query($conn, "SELECT user_id, first_name, last_name, username, email, card_id as main_card_id FROM users_info where username = '$user_name'");
+    $result3 = mysqli_query($conn, "SELECT user_id, first_name, last_name, username, email, card_id as main_card_id FROM users_info where user_id = '$userId'");
 
     if (mysqli_num_rows($result3) > 0) {
         while ($row3 = mysqli_fetch_array($result3)) {
