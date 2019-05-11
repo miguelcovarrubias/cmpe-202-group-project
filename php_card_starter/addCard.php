@@ -16,7 +16,7 @@ $card_code = mysqli_real_escape_string($conn, $_POST['card_code']);
 
 if(isset($user_name)) echo "Hello, ".$user_name."<br>";
 	if(isset($_POST['add'])) {
-		$authCard = mysqli_query($conn, "SELECT * FROM myCard WHERE card_number='$card_number' AND card_code=$card_code");
+		$authCard = mysqli_query($conn, "SELECT card_number FROM myCard WHERE card_number='$card_number'");
 		if(!mysqli_fetch_assoc($authCard)) {
 			$insertCard = "INSERT INTO myCard (card_number, card_code, user_name) VALUES ('$card_number', '$card_code', '$user_name')";
 			mysqli_query($conn, $insertCard);
