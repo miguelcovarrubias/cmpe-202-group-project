@@ -4,8 +4,15 @@ include_once('userSession.php');
 checkSession();
 
 try {
-$cardTable = "CREATE TABLE IF NOT EXISTS myCard (card_id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY, card_number int(9) NOT NULL, card_code int(3) NOT NULL, user_name VARCHAR(100) NOT NULL)";
-
+$cardTable = "CREATE TABLE IF NOT EXISTS cards_info ( 
+  card_id int(8) NOT NULL AUTO_INCREMENT,
+  card_number int(9) NOT NULL,
+  card_code int(3) NOT NULL,
+  user_id int(8) NOT NULL,
+  active varchar(6) DEFAULT 'false',
+  money double DEFAULT 20,
+  PRIMARY KEY (card_id)
+ )";
 mysqli_query($conn, $cardTable);
 } catch(Exception $e) {
 	$e->getMessage();
@@ -14,11 +21,22 @@ $user_name = $_SESSION['name'];
 $card_number = mysqli_real_escape_string($conn, $_POST['card_number']);
 $card_code = mysqli_real_escape_string($conn, $_POST['card_code']);
 
+$nameQuery = "select * from register where user_username='$user_name'";
+$result = $conn->query($nameQuery);
+
+$userID;
+if($result->num_rows > 0){
+	if($row = $result->fetch_assoc()){
+		$userID = $row['id'];
+	}
+}
+
+
 if(isset($user_name)) echo "Hello, ".$user_name."<br>";
 	if(isset($_POST['add'])) {
-		$authCard = mysqli_query($conn, "SELECT card_number FROM myCard WHERE card_number='$card_number'");
+		$authCard = mysqli_query($conn, "SELECT card_number FROM cards_info WHERE card_number='$card_number'");
 		if(!mysqli_fetch_assoc($authCard)) {
-			$insertCard = "INSERT INTO myCard (card_number, card_code, user_name) VALUES ('$card_number', '$card_code', '$user_name')";
+			$insertCard = "INSERT INTO cards_info (card_number, card_code, user_id, active) VALUES ('$card_number', '$card_code', '$userID', 'true')";
 			mysqli_query($conn, $insertCard);
 		} else {
 		echo "Warning: invalid card!";

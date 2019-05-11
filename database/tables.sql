@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS cards_info (
   card_number int(9) NOT NULL,
   card_code int(3) NOT NULL,
   user_id int(8) NOT NULL,
+  active varchar(6) DEFAULT 'false',
+  money double DEFAULT 20,
   PRIMARY KEY (card_id)
 );
 
