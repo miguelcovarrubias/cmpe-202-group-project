@@ -94,8 +94,9 @@ $cart = array();
 <!-- push to cart               -->
 
 <button class="button" type="submit" name="insertOrder"> Add to Order </button>
-</br>
+
 <br>  </br>
 <button class="button" type="submit" name="insertOrder"> Finish and Pay </button>
-</form>	
-		
+
+</form>
+

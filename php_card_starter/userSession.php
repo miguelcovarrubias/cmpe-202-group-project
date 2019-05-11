@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 //prevent user from accessing resources (e.g, add card) if not logged in

@@ -1,6 +1,7 @@
 <?php
 	require_once('dbConnection.php');
 	include_once('userSession.php');
+    checkSession();
 
 	$orderID;
 	$userID;
@@ -14,12 +15,11 @@
 	
 		if($result->num_rows > 0){
 			if($row = $result->fetch_assoc()){
-				$userID = $row['id'];
+				$userID = $row['user_id'];
 			}
 		}
 	}
 	
-	//echo "<br><h1>$orderID</h1><br>";
 
 	//charge the user's active card 
 	getOrderPrice($userID, $orderID, $conn);
@@ -34,12 +34,12 @@
 		if($result = $conn->query($orderQuery)){
 			//echo("Got something <br>");
 			while($row = $result->fetch_assoc()){
-				$orderID = row["order_id"];
+				$orderID = $row["order_id"];
 				$price = $row["price"] + $price;	
 			}
 			echo "<br><h1>Total price to pay: $$price </h1><br>";
-			$insertToOrderStatus = "insert into orders_status(user_id, total_price_amount) values($userID, $price)";
-			$conn->query($insertToOrderStatus);
+			$insertToOrderStatus = "insert into orders_status(user_id, is_done, total_price_amount) values($userID, 'false', $price)";
+			$res = $conn->query($insertToOrderStatus);
 			
 		}
 		//echo($price);
@@ -71,3 +71,16 @@
 			}
 		} 
 	}
+
+	?>
+
+<!DOCTYPE html>
+<html>
+
+<body>
+<p><a href="userDashboard.php"><button>User Dashboard</button></a></p>
+<p><a href="viewCard.php"><button>View Card</button></a></p>
+<p><a href="logout.php"><button>Logout</button></a></p>
+</body>
+</html>
+
