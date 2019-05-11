@@ -3,8 +3,8 @@ require_once('dbConnection.php');
 include_once('userSession.php');
 checkSession();
 
-$user_name = $_SESSION['name'];
-#if(isset($user_name)) echo "<u>".$user_name.", Active Cards:</u><br>";
+$userId = $_SESSION['name'];
+#if(isset($userId)) echo "<u>".$userId.", Active Cards:</u><br>";
 
 //fetch current user's card numbers
 $ordersList = mysqli_query($conn, "
@@ -13,10 +13,10 @@ join orders_description
 on orders_status.order_id = orders_description.order_id
 join users_info
 on users_info.user_id = orders_status.user_id 
-where users_info.username = '$user_name' order by orders_status.order_id desc;
+where users_info.user_id = '$userId' order by orders_status.order_id desc;
 ");
 
-echo "<h2> These are your orders $user_name! : </h2>";
+echo "<h2> These are your orders: </h2>";
 $orderId = -1;
 while($tableRowIndex = mysqli_fetch_row($ordersList)) {
 
