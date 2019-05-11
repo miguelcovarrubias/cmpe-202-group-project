@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -eq 0 ]; then
     echo "Usage:"
-    init_database.sh "mysql_user" "mysql_password" "host_name"
+    echo "init_database.sh mysql_user mysql_password host_name"
+    exit 0
 fi
 
 database_name="starbucks"

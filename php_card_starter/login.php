@@ -5,7 +5,7 @@
 	if (isset($_POST['login'])) {
 	$username = mysqli_real_escape_string($conn, $_POST['username']);
 	$password = mysqli_real_escape_string($conn, md5($_POST['password']));
-	$authQuery = mysqli_query($conn, "SELECT id FROM register WHERE user_username='$username' AND user_password='$password'");
+	$authQuery = mysqli_query($conn, "SELECT user_id FROM users_info WHERE username='$username' AND password='$password' ");
 
 		if(mysqli_fetch_assoc($authQuery)) {
 			$_SESSION['loggedin'] = TRUE;

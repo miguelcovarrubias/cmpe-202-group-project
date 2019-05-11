@@ -9,9 +9,11 @@ CREATE TABLE IF NOT EXISTS cards_info (
 CREATE TABLE IF NOT EXISTS users_info (
   user_id int(8) NOT NULL AUTO_INCREMENT,
   first_name text NOT NULL,
-  last_name text DEFAULT '',
-  user_password text,
-  card_id int(8),
+  last_name text,
+  username text,
+  password text,
+  email text,
+  card_id int(8) DEFAULT NULL,
   PRIMARY KEY (user_id)
 );
 

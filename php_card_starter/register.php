@@ -3,21 +3,15 @@
 	include_once('userSession.php');
 	checkRegSession();
 
-	try {
-	$registerTable = "CREATE TABLE IF NOT EXISTS register (id int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY, user_name varchar(50) NOT NULL, user_email varchar(50) NOT NULL, user_username VARCHAR(50) NOT NULL, user_password VARCHAR(50) NOT NULL)";
-	mysqli_query($conn, $registerTable);
-	} catch(Exception $e) {
-	$e->getMessage();
-	}
-
 	//SQL injection prevention & some validation queries
-	$name = mysqli_real_escape_string($conn, $_POST['name']);
+	$first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
+	$last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$username = mysqli_real_escape_string($conn, $_POST['username']);
 	$password = mysqli_real_escape_string($conn, $_POST['password']);
 	$confirmpass = mysqli_real_escape_string($conn, $_POST['confirmpass']);
-	$authUsername = mysqli_query($conn, "SELECT id FROM register WHERE user_username='$username'");
-	$authEmail = mysqli_query($conn, "SELECT id FROM register WHERE user_email='$email'");
+	$authUsername = mysqli_query($conn, "SELECT user_id FROM users_info WHERE username='$username'");
+	$authEmail = mysqli_query($conn, "SELECT user_id FROM users_info WHERE email='$email'");
 
 	//submit pressed? validate user information -> persist registration data
 	if(isset($_POST['submit'])) {
@@ -25,7 +19,7 @@
 			echo "User already exists.";
 		} else {
 			$password = md5($password);
-			$registerQuery = "INSERT INTO register (user_name, user_email, user_username, user_password) VALUES ('$name', '$email', '$username', '$password')";
+			$registerQuery = "INSERT INTO users_info (first_name, last_name, username, password, email) VALUES ('$first_name', '$last_name', '$username', '$password', '$email')";
 			mysqli_query($conn, $registerQuery);
 			header('Location: login.php');
 		exit();
@@ -41,7 +35,8 @@
 <body>
 	<h1>Create account</h1>
 	<form method = "post" action = "register.php"> 
-    Your Name: <input type="text" placeholder="Your name" name="name" pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$" required><br>
+    First Name: <input type="text" placeholder="Your name" name="first_name" pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$" required><br>
+    Last Name: <input type="text" placeholder="Your name" name="last_name" pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$" required><br>
 	Email: <input type="email" placeholder="example@gmail.com" name="email" required><br>
 	Username: <input type="username" placeholder="Your username" maxlength="15" name="username" required><br>
 	Password: <input type="password" placeholder="At least 6 characters" minlength="6" maxlength="16" name="password" id="password" required><br>

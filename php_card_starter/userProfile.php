@@ -7,7 +7,7 @@ if (isset($_GET['username']) && $_GET['username']!="" or $user_name != '') {
     if ($user_name == '') {
         $user_name = $_GET['username'];
     }
-    $result3 = mysqli_query($conn, "SELECT id, user_name, user_email, user_username FROM register where user_username = '$user_name'");
+    $result3 = mysqli_query($conn, "SELECT id, first_name, last_name, username, email, card_id as main_card_id FROM user_info where username = '$user_name'");
 
     if (mysqli_num_rows($result3) > 0) {
         while ($row3 = mysqli_fetch_array($result3)) {
