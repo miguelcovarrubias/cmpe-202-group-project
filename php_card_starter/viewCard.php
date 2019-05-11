@@ -5,12 +5,8 @@ checkSession();
 
 $user_name = $_SESSION['name'];
 if(isset($user_name)) echo "<u>".$user_name.", Active Cards:</u><br>";
-
-//fetch current user's card numbers
+//fetch current user card numbers
 $cardNumber = mysqli_query($conn, "SELECT card_number FROM myCard WHERE user_name='$user_name'");
-while($row = mysqli_fetch_assoc($cardNumber)) {
-	echo "card: ".$row['card_number']."<br>";
-} 
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,6 +14,21 @@ while($row = mysqli_fetch_assoc($cardNumber)) {
 	<title>View Card</title>
 </head>
 <body>
-	<a href="addCard.php"><button>Manage Card</button></a>
+	<form method="get" action="">
+		<select name="card" onChange="this.form.submit()">
+			<option>Card</option>
+			<?php while($row = mysqli_fetch_array($cardNumber)):; ?>
+			<option><?php echo $row['card_number']; ?></option>
+			<?php endwhile; ?>
+		</select>
+		<?php 
+		if(isset($_GET['card'])) {
+		echo "You Selected Card: ".$_GET['card'];
+		//do something with selected card - payment?
+		}
+		?>
+	</form>
+
+<a href="addCard.php"><button>Add Card</button></a>
 </body>
 </html>
