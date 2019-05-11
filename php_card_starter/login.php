@@ -5,11 +5,11 @@
 	if (isset($_POST['login'])) {
 	$username = mysqli_real_escape_string($conn, $_POST['username']);
 	$password = mysqli_real_escape_string($conn, md5($_POST['password']));
-	$authQuery = mysqli_query($conn, "SELECT user_id FROM users_info WHERE username='$username' AND password='$password' ");
+	$authQuery = mysqli_query($conn, "SELECT user_id FROM users_info WHERE username='$username' AND password='$password'");
 
-		if(mysqli_fetch_assoc($authQuery)) {
+		if($row = mysqli_fetch_assoc($authQuery)) {
 			$_SESSION['loggedin'] = TRUE;
-			$_SESSION['name'] = $username;
+			$_SESSION['name'] = $row['user_id'];
 			header("Location: userDashboard.php?login=success");
 		} else {
 		header("Location: login.php?login=failed");
