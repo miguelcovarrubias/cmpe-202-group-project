@@ -25,7 +25,7 @@ if(isset($user_name)) echo "<u>".$user_name.", Active Cards:</u><br>";
 		<?php
 		if(isset($_GET['remove'])) {
 			$cardNumber = $_GET['remove'];
-			$removeCard = "DELETE FROM cards_info WHERE user_id='$userID' AND card_number='$cardNumber'";
+			$removeCard = "DELETE FROM cards_info WHERE user_id='$user_id' AND card_number='$cardNumber'";
 			mysqli_query($conn, $removeCard);
 			echo "Card Removed: ".$cardNumber;
 		}
