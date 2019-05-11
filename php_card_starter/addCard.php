@@ -10,21 +10,19 @@ mysqli_query($conn, $cardTable);
 } catch(Exception $e) {
 	$e->getMessage();
 }
-
 $user_name = $_SESSION['name'];
 $card_number = mysqli_real_escape_string($conn, $_POST['card_number']);
 $card_code = mysqli_real_escape_string($conn, $_POST['card_code']);
 
 if(isset($user_name)) echo "Hello, ".$user_name;
-
 	if(isset($_POST['add'])) {
 		$authCard = mysqli_query($conn, "SELECT * FROM myCard WHERE card_number='$card_number' AND card_code=$card_code");
-			if(!mysqli_fetch_assoc($authCard)) {
-				$insertCard = "INSERT INTO myCard (card_number, card_code, user_name) VALUES ('$card_number', '$card_code', '$user_name')";
-				mysqli_query($conn, $insertCard);
-			}
-	} else {
+		if(!mysqli_fetch_assoc($authCard)) {
+			$insertCard = "INSERT INTO myCard (card_number, card_code, user_name) VALUES ('$card_number', '$card_code', '$user_name')";
+			mysqli_query($conn, $insertCard);
+		} else {
 		echo "Warning: invalid card!";
+		}
 	}
 ?>
  <!DOCTYPE html>
