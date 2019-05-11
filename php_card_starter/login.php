@@ -27,7 +27,7 @@
 	<form method = "post" action = "login.php">
 	Username: <input type="username" placeholder="Enter username" name="username" maxlength="15" required><br>
 	Password: <input type="password" placeholder="Enter password" name="password" minlength="6" maxlength="16" required><br>
-	<input type="submit" name="login" value="Login"></button><br>
+	<input type="submit" name="login" value="Sign in"></button><br>
 	<p>New? <a href="register.php">Create account</a></p>
 	</form>
 </body>
