@@ -12,7 +12,7 @@ select orders_status.order_id as order_id, orders_status.is_done, total_price_am
 join orders_description 
 on orders_status.order_id = orders_description.order_id
 join users_info
-on users_info.user_id = users_info.user_id 
+on users_info.user_id = orders_status.user_id 
 where users_info.username = '$user_name' order by orders_status.order_id desc;
 ");
 
