@@ -3,7 +3,7 @@
 ## Team Name: Chicken Dinner
 ## Team Members: 
 - **Miguel Covarrubias**
-- **Jack****y Z. Chen**
+- **Jacky Z. Chen**
 - **Maninderjit Singh**
 - **Khang Doan**
 
