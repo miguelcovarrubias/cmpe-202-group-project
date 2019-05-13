@@ -286,7 +286,10 @@ Cluster Task Definition For running Instances using the app docker image:
 ![](https://paper-attachments.dropbox.com/s_03126EB1256DC5A852B9225B31A415C1508F6E566AE15750B2C78B6B4BBE2975_1557720360242_image.png)
 
 **Team Sprint Sheet**
-![sprint_sheet](https://user-images.githubusercontent.com/32407740/57596386-4be08a80-74ff-11e9-8f3f-03d754290703.PNG)
+![sprint](https://user-images.githubusercontent.com/32407740/57597211-5dc42c80-7503-11e9-8993-a3f3146cfeba.PNG)
+
+**Team Burndown Chart**
+![burndown](https://user-images.githubusercontent.com/32407740/57597214-5ef55980-7503-11e9-85ce-b63f1472f2f9.PNG)
 
 ## Setting up the project form git:
 - The project is stored (git cloned) in the following directory:
